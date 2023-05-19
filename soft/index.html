@@ -1,0 +1,10 @@
+<ul>
+    {% for task in tasks %}
+    <li>{{ task }}
+        <form action="/delete_task" method="post" style="display:inline;">
+            <input type="hidden" name="task" value="{{ task }}">
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
