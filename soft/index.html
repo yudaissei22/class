@@ -1,10 +1,49 @@
-<ul>
-    {% for task in tasks %}
-    <li>{{ task }}
-        <form action="/delete_task" method="post" style="display:inline;">
-            <input type="hidden" name="task" value="{{ task }}">
-            <button type="submit">Delete</button>
-        </form>
-    </li>
-    {% endfor %}
-</ul>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>To-Do List</title>
+  </head>
+  <body>
+    <h1>To-Do List</h1>
+    <form action="{{ url_for('add') }}" method="POST">
+      <input type="text" name="todo" placeholder="Enter a new task">
+      <button type="submit">Add</button>
+    </form>
+    <ul>
+      {% for index, todo in enumerate(todos) %}
+      <li>
+	{{ todo }}
+	<a href="{{ url_for('delete', index=index) }}">[Delete]</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </body>
+</html>
+from flask import Flask, render_template, request, redirect, url_for
+
+app = Flask(__name__)
+todos = []
+
+@app.route('/')
+def index():
+return render_template('index.html')
+
+@app.route('/todos')
+def todo_list():
+return render_template('todos.html', todos=todos)
+
+@app.route('/add', methods=['POST'])
+def add():
+todo = request.form.get('todo')
+todos.append(todo)
+return redirect(url_for('index'))
+
+@app.route('/delete/<int:index>', methods=['GET'])
+  def delete(index):
+  if index < len(todos):
+	     del todos[index]
+	     return redirect(url_for('todo_list'))
+
+	     if __name__ == '__main__':
+	     app.run()
+	     
