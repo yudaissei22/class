@@ -12,7 +12,7 @@ ratings_average['ratings_count'] = pd.DataFrame(data.groupby('title')['rating'].
 
 ratings_matrix = data.pivot_table(index='userId', columns='title', values='rating')
 
-favorite_movie_ratings = ratings_matrix['Aladdin (1992)']
+favorite_movie_ratings = ratings_matrix['Toy Story (1995)']
 
 similar_movies = ratings_matrix.corrwith(favorite_movie_ratings)
 
@@ -24,5 +24,14 @@ correlation = correlation.join(ratings_average['ratings_count'])
 recommendation = correlation[correlation['ratings_count']>100].sort_values('Correlation', ascending=False)
 
 recommendation = recommendation.merge(movies,on='title')
+
+#グラフを表示するとこ
+x=title
+y=correlation
+
+plt(x,y)
+plt.show()
+
+
 
 print(recommendation.head(10))
