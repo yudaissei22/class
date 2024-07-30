@@ -32,3 +32,7 @@ if __name__ == '__main__':
     import sys
     RPN(sys.argv[1])
     test()
+
+
+if  
+    s.append()     
