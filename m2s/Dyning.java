@@ -1,3 +1,4 @@
+
 class Phil implements Runnable{
     int x,y;
     int id;
@@ -18,7 +19,7 @@ class Phil implements Runnable{
     }
     public void rsleep(int m){
 	try{
-	    Thread.sleep((int)random(m+100));
+	    Thread.sleep((int) random(m+100));
 	}
 	catch (Exception ex){
 	}
@@ -26,7 +27,7 @@ class Phil implements Runnable{
 
     public void sleep(int m){
 	try {
-	    Thread.sleep(m)
+	    Thread.sleep(m);
 		}
 	catch (Exception ex){
 	}
@@ -36,14 +37,14 @@ class Phil implements Runnable{
 	while (true){
 	    rsleep(1500);
 	    left.pick(this);
-	    println("" + this.id + "picked left fork" + left.id);
+	    System.out.println("" + this.id + "picked left fork" + left.id);
 	    rsleep(1000);
 	    right.pick(this);
-	    println("" + this.id + "picked right fork" + right.id);
+	    System.out.println("" + this.id + "picked right fork" + right.id);
 	    rsleep(1000);
-	    println("" + this.id + "drops right fork" + right.id);
+	    System.out.println("" + this.id + "drops right fork" + right.id);
 	    right.drop(this);
-	    println("" + this.id + "drops left fork" + left.id);
+	    System.out.println("" + this.id + "drops left fork" + left.id);
 	    left.drop(this);
 	}
     }
@@ -62,15 +63,16 @@ class Fork{
 
     public synchronized void pick(Phil me) {
 	while (owner != null){
-	    // println("" + me.id + "waiting for Fork" + id + "from Phil:" + owner.id);
+	    // System.out.println("" + me.id + "waiting for Fork" + id + "from Phil:" + owner.id);
 	    try{
 		this.wait();
 	    }
 	    catch (Exception ex){
-		println(ex);
+		System.out.println(ex);
 	    }
 	}
 	owner = me;
+    }
 
 	public synchronized void drop(Phil me) {
 		if (owner == me) {
@@ -80,20 +82,3 @@ class Fork{
 	    }
     }
 
-    Fork[] fork;
-    Phil[] phil;
-
-    PImage table;
-    
-    void setup() {
-	table = loadImage("table.jpg");
-	size(482,500);
-
-	phil = new Phil[5];
-	fork = new Fork[5];
-
-	
-	    
-	
-		
-	
