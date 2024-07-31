@@ -1,5 +1,10 @@
+def hanoi(n, a, b, c):
+    if n > 0:
+        hanoi(n-1, a, b, c)
+        print("move %s: %s --> %s" %(n,a,c))
+        hanoi(n-1, b, a, c)
 
-# 演算子が来たら、スタックから2個とって、計算結果を、積む。
+hanoi(4,"A","B","C")
 
 
 class Stack:
@@ -44,5 +49,4 @@ while True:
             st.push(int(i))
 
     print(st.stack)
-
 

@@ -1,5 +1,5 @@
 def hanoi(n, a, b, c):
-    if n > 1:
+    if n > 0:
         hanoi(n-1, a, b, c)
         print("move %s: %s --> %s" %(n,a,c))
         hanoi(n-1, b, a, c)
